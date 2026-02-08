@@ -4,103 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btn_source"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select Source"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_sync_pairs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_source_path"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="No source selected"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_source"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_source"
-        app:layout_constraintTop_toTopOf="@+id/btn_source" />
-
-    <Button
-        android:id="@+id/btn_dest"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Select Destination"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_source" />
-
-    <TextView
-        android:id="@+id/tv_dest_path"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="No destination selected"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_dest"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_dest"
-        app:layout_constraintTop_toTopOf="@+id/btn_dest" />
-
-    <RadioGroup
-        android:id="@+id/rg_compare_mode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/btn_dest">
-
-        <RadioButton
-            android:id="@+id/rb_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Name Only" />
-
-        <RadioButton
-            android:id="@+id/rb_hash"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Hash" />
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/btn_sync"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Start Sync"
-        app:layout_constraintTop_toBottomOf="@+id/rg_compare_mode" />
-
-    <TextView
-        android:id="@+id/tv_current_file"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Current File: "
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@+id/btn_sync" />
-
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_input_add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_current_file">
-
-        <TextView
-            android:id="@+id/tv_log"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Logs will appear here..."
-            android:textSize="12sp"
-            android:fontFamily="monospace" />
-    </ScrollView>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
