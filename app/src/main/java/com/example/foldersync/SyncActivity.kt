@@ -180,7 +180,7 @@ class SyncActivity : AppCompatActivity() {
             }
         }
 
-        val syncLogic = SyncLogic(contentResolver, callback)
+        val syncLogic = SyncLogic(this@SyncActivity, callback)
 
         lifecycleScope.launch(Dispatchers.IO) {
             try {
