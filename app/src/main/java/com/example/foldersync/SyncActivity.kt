@@ -37,8 +37,9 @@ class SyncActivity : AppCompatActivity() {
             sourceUri = uri
             contentResolver.takePersistableUriPermission(uri, android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION)
             val file = DocumentFile.fromTreeUri(this, uri)
-            tvSourcePath.text = file?.name ?: uri.path
-            appendLog("Source selected: ${file?.name}")
+            val fullPath = PathUtils.getPath(this, uri)
+            tvSourcePath.text = fullPath ?: file?.name ?: uri.path
+            appendLog("Source selected: ${fullPath ?: file?.name}")
         }
     }
 
@@ -47,8 +48,9 @@ class SyncActivity : AppCompatActivity() {
             destUri = uri
             contentResolver.takePersistableUriPermission(uri, android.content.Intent.FLAG_GRANT_WRITE_URI_PERMISSION or android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION)
             val file = DocumentFile.fromTreeUri(this, uri)
-            tvDestPath.text = file?.name ?: uri.path
-            appendLog("Destination selected: ${file?.name}")
+            val fullPath = PathUtils.getPath(this, uri)
+            tvDestPath.text = fullPath ?: file?.name ?: uri.path
+            appendLog("Destination selected: ${fullPath ?: file?.name}")
         }
     }
 
@@ -100,9 +102,11 @@ class SyncActivity : AppCompatActivity() {
             // Try to get display names
             val sourceFile = DocumentFile.fromTreeUri(this, sourceUri!!)
             val destFile = DocumentFile.fromTreeUri(this, destUri!!)
+            val sourcePath = PathUtils.getPath(this, sourceUri!!)
+            val destPath = PathUtils.getPath(this, destUri!!)
 
-            tvSourcePath.text = sourceFile?.name ?: pair.sourceUri
-            tvDestPath.text = destFile?.name ?: pair.destUri
+            tvSourcePath.text = sourcePath ?: sourceFile?.name ?: pair.sourceUri
+            tvDestPath.text = destPath ?: destFile?.name ?: pair.destUri
 
             if (pair.useHash) {
                 rgCompareMode.check(R.id.rb_hash)
