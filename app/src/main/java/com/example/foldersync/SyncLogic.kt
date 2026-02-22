@@ -12,8 +12,8 @@ interface SyncCallback {
 class SyncLogic(private val context: Context, private val callback: SyncCallback) {
 
     suspend fun syncFolder(sourceDir: DocumentFile, destDir: DocumentFile, useHash: Boolean) {
-        val sourcePath = PathUtils.getPath(sourceDir.uri)
-        val destPath = PathUtils.getPath(destDir.uri)
+        val sourcePath = PathUtils.getPath(context, sourceDir.uri)
+        val destPath = PathUtils.getPath(context, destDir.uri)
 
         if (sourcePath != null && destPath != null) {
             callback.onLog("Resolving paths for rsync...")
