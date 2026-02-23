@@ -27,12 +27,11 @@
         android:id="@+id/tv_source_path"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="No source selected"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_source"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_source"
-        app:layout_constraintTop_toTopOf="@+id/btn_source" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_source" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_dest"
@@ -41,18 +40,17 @@
         android:layout_marginTop="16dp"
         android:text="Select Destination"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_source" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_source_path" />
 
     <TextView
         android:id="@+id/tv_dest_path"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="No destination selected"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_dest"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_dest"
-        app:layout_constraintTop_toTopOf="@+id/btn_dest" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_dest" />
 
     <RadioGroup
         android:id="@+id/rg_compare_mode"
@@ -60,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/btn_dest">
+        app:layout_constraintTop_toBottomOf="@+id/tv_dest_path">
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/rb_name"
