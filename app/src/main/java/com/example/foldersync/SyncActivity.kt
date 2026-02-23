@@ -21,7 +21,7 @@ class SyncActivity : AppCompatActivity() {
     private lateinit var tvSourcePath: TextView
     private lateinit var btnDest: Button
     private lateinit var tvDestPath: TextView
-    private lateinit var rgCompareMode: RadioGroup
+    private lateinit var etRsyncArgs: com.google.android.material.textfield.TextInputEditText
     private lateinit var btnSync: Button
     private lateinit var tvCurrentFile: TextView
     private lateinit var tvLog: TextView
@@ -62,7 +62,7 @@ class SyncActivity : AppCompatActivity() {
         tvSourcePath = findViewById(R.id.tv_source_path)
         btnDest = findViewById(R.id.btn_dest)
         tvDestPath = findViewById(R.id.tv_dest_path)
-        rgCompareMode = findViewById(R.id.rg_compare_mode)
+        etRsyncArgs = findViewById(R.id.et_rsync_args)
         btnSync = findViewById(R.id.btn_sync)
         tvCurrentFile = findViewById(R.id.tv_current_file)
         tvLog = findViewById(R.id.tv_log)
@@ -108,11 +108,12 @@ class SyncActivity : AppCompatActivity() {
             tvSourcePath.text = sourcePath ?: sourceFile?.name ?: pair.sourceUri
             tvDestPath.text = destPath ?: destFile?.name ?: pair.destUri
 
-            if (pair.useHash) {
-                rgCompareMode.check(R.id.rb_hash)
+            val args = if (pair.rsyncArgs.isNotEmpty()) {
+                pair.rsyncArgs
             } else {
-                rgCompareMode.check(R.id.rb_name)
+                if (pair.useHash) "-av --delete --progress -c" else "-av --delete --progress"
             }
+            etRsyncArgs.setText(args)
 
             appendLog("Loaded Sync Pair: ${pair.name}")
         }
@@ -127,7 +128,8 @@ class SyncActivity : AppCompatActivity() {
         val sourceFile = DocumentFile.fromTreeUri(this, sourceUri!!)
         val destFile = DocumentFile.fromTreeUri(this, destUri!!)
         val name = "${sourceFile?.name ?: "Source"} -> ${destFile?.name ?: "Dest"}"
-        val useHash = rgCompareMode.checkedRadioButtonId == R.id.rb_hash
+        val rsyncArgs = etRsyncArgs.text.toString()
+        val useHash = rsyncArgs.contains("-c")
 
         // If we are editing an existing pair, reuse its ID. Otherwise create a new one.
         val idToSave = currentPairId ?: UUID.randomUUID().toString()
@@ -137,7 +139,8 @@ class SyncActivity : AppCompatActivity() {
             name = name,
             sourceUri = sourceUri.toString(),
             destUri = destUri.toString(),
-            useHash = useHash
+            useHash = useHash,
+            rsyncArgs = rsyncArgs
         )
 
         SyncPairRepository.saveSyncPair(this, pair)
@@ -166,7 +169,7 @@ class SyncActivity : AppCompatActivity() {
             return
         }
 
-        val useHash = rgCompareMode.checkedRadioButtonId == R.id.rb_hash
+        val rsyncArgs = etRsyncArgs.text.toString()
 
         btnSync.isEnabled = false
         appendLog("Starting sync...")
@@ -188,7 +191,7 @@ class SyncActivity : AppCompatActivity() {
 
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                syncLogic.syncFolder(sourceDir, destDir, useHash)
+                syncLogic.syncFolder(sourceDir, destDir, rsyncArgs)
                 withContext(Dispatchers.Main) {
                     appendLog("Sync completed successfully.")
                 }

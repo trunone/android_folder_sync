@@ -23,7 +23,8 @@ class SyncPairRepositoryTest {
             name = "Test Pair",
             sourceUri = "content://source",
             destUri = "content://dest",
-            useHash = true
+            useHash = true,
+            rsyncArgs = "-av --delete"
         )
 
         // Mock getting empty list
