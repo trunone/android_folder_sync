@@ -12,7 +12,8 @@ data class SyncPair(
     val name: String,
     val sourceUri: String,
     val destUri: String,
-    val useHash: Boolean
+    val useHash: Boolean,
+    val rsyncArgs: String = ""
 )
 
 object SyncPairRepository {
@@ -36,7 +37,8 @@ object SyncPairRepository {
                     name = obj.getString("name"),
                     sourceUri = obj.getString("sourceUri"),
                     destUri = obj.getString("destUri"),
-                    useHash = obj.getBoolean("useHash")
+                    useHash = obj.getBoolean("useHash"),
+                    rsyncArgs = obj.optString("rsyncArgs", "")
                 )
             )
         }
@@ -73,6 +75,7 @@ object SyncPairRepository {
             obj.put("sourceUri", item.sourceUri)
             obj.put("destUri", item.destUri)
             obj.put("useHash", item.useHash)
+            obj.put("rsyncArgs", item.rsyncArgs)
             jsonArray.put(obj)
         }
         getPrefs(context).edit().putString(KEY_SYNC_PAIRS, jsonArray.toString()).apply()

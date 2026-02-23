@@ -11,7 +11,7 @@ interface SyncCallback {
 
 class SyncLogic(private val context: Context, private val callback: SyncCallback) {
 
-    suspend fun syncFolder(sourceDir: DocumentFile, destDir: DocumentFile, useHash: Boolean) {
+    suspend fun syncFolder(sourceDir: DocumentFile, destDir: DocumentFile, rsyncArgs: String) {
         val sourcePath = PathUtils.getPath(context, sourceDir.uri)
         val destPath = PathUtils.getPath(context, destDir.uri)
 
@@ -19,7 +19,7 @@ class SyncLogic(private val context: Context, private val callback: SyncCallback
             callback.onLog("Resolving paths for rsync...")
             callback.onLog("Source: $sourcePath")
             callback.onLog("Dest: $destPath")
-            runRsync(sourcePath, destPath, useHash)
+            runRsync(sourcePath, destPath, rsyncArgs)
         } else {
             callback.onLog("Error: Could not resolve paths for rsync. Ensure you are selecting local storage.")
             callback.onLog("Source resolved: $sourcePath")
@@ -27,14 +27,9 @@ class SyncLogic(private val context: Context, private val callback: SyncCallback
         }
     }
 
-    private suspend fun runRsync(sourcePath: String, destPath: String, useHash: Boolean) {
-        val args = mutableListOf<String>()
-        args.add("-av")
-        args.add("--delete")
-        args.add("--progress")
-        if (useHash) {
-            args.add("-c")
-        }
+    private suspend fun runRsync(sourcePath: String, destPath: String, rsyncArgs: String) {
+        val args = tokenizeArgs(rsyncArgs).toMutableList()
+
         // Ensure trailing slash for source to copy contents, not the directory itself
         val finalSource = if (sourcePath.endsWith("/")) sourcePath else "$sourcePath/"
         args.add(finalSource)
@@ -60,5 +55,37 @@ class SyncLogic(private val context: Context, private val callback: SyncCallback
         } else {
             callback.onLog("Rsync failed with exit code: $exitCode")
         }
+    }
+
+    private fun tokenizeArgs(command: String): List<String> {
+        val args = mutableListOf<String>()
+        val current = StringBuilder()
+        var inQuote = false
+        var quoteChar = ' '
+
+        for (char in command) {
+            when {
+                char == ' ' && !inQuote -> {
+                    if (current.isNotEmpty()) {
+                        args.add(current.toString())
+                        current.clear()
+                    }
+                }
+                (char == '"' || char == '\'') && !inQuote -> {
+                    inQuote = true
+                    quoteChar = char
+                }
+                (char == '"' || char == '\'') && inQuote && char == quoteChar -> {
+                    inQuote = false
+                }
+                else -> {
+                    current.append(char)
+                }
+            }
+        }
+        if (current.isNotEmpty()) {
+            args.add(current.toString())
+        }
+        return args
     }
 }

@@ -52,28 +52,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_dest" />
 
-    <RadioGroup
-        android:id="@+id/rg_compare_mode"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_rsync_args"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:orientation="horizontal"
+        android:hint="Rsync Arguments"
         app:layout_constraintTop_toBottomOf="@+id/tv_dest_path">
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/rb_name"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_rsync_args"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Name Only" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/rb_hash"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Hash" />
-    </RadioGroup>
+            android:text="-av --delete --progress" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_sync"
@@ -81,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Start Sync"
-        app:layout_constraintTop_toBottomOf="@+id/rg_compare_mode" />
+        app:layout_constraintTop_toBottomOf="@+id/til_rsync_args" />
 
     <TextView
         android:id="@+id/tv_current_file"
