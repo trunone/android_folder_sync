@@ -1,4 +1,4 @@
-package com.example.foldersync
+package io.github.trunone.folder_sync
 
 import android.net.Uri
 import android.os.Bundle

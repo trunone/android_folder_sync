@@ -1,6 +1,6 @@
-# FolderSync
+# io.github.trunone.folder_sync
 
-FolderSync is an Android application designed to synchronize local folders on your device using the powerful `rsync` utility.
+io.github.trunone.folder_sync is an Android application designed to synchronize local folders on your device using the powerful `rsync` utility.
 
 ## Features
 

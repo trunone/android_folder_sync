@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.foldersync'
+    namespace 'io.github.trunone.folder_sync'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.foldersync"
+        applicationId "io.github.trunone.folder_sync"
         minSdk 24
         targetSdk 34
         versionCode 1

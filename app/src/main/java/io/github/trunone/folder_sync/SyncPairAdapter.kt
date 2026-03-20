@@ -1,4 +1,4 @@
-package com.example.foldersync
+package io.github.trunone.folder_sync
 
 import android.view.LayoutInflater
 import android.view.View
