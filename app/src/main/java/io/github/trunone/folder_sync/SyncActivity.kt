@@ -3,7 +3,6 @@ package io.github.trunone.folder_sync
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
-import android.widget.RadioGroup
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -149,7 +148,7 @@ class SyncActivity : AppCompatActivity() {
 
     private fun appendLog(message: String) {
         val currentText = tvLog.text.toString()
-        tvLog.text = "$currentText\n$message"
+        tvLog.text = getString(R.string.log_format, currentText, message)
         scrollView.post {
             scrollView.fullScroll(ScrollView.FOCUS_DOWN)
         }
@@ -203,7 +202,7 @@ class SyncActivity : AppCompatActivity() {
             } finally {
                 withContext(Dispatchers.Main) {
                     btnSync.isEnabled = true
-                    tvCurrentFile.text = "Current File: Done"
+                    tvCurrentFile.text = getString(R.string.current_file_done)
                 }
             }
         }

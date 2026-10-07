@@ -28,9 +28,10 @@ class SyncPairAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pair = pairs[position]
+        val context = holder.itemView.context
         holder.tvName.text = pair.name
-        holder.tvSource.text = "Source: ${pair.sourceUri}"
-        holder.tvDest.text = "Dest: ${pair.destUri}"
+        holder.tvSource.text = context.getString(R.string.source_label, pair.sourceUri)
+        holder.tvDest.text = context.getString(R.string.dest_label, pair.destUri)
 
         holder.itemView.setOnClickListener { onItemClick(pair) }
         holder.btnDelete.setOnClickListener { onDeleteClick(pair) }
