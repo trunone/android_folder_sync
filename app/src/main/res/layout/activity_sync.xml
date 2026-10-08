@@ -11,7 +11,7 @@
         android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Pair"
+        android:text="@string/save_pair"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -19,7 +19,7 @@
         android:id="@+id/btn_source"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Source"
+        android:text="@string/select_source"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +28,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="No source selected"
+        android:text="@string/no_source_selected"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_source" />
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Select Destination"
+        android:text="@string/select_destination"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_source_path" />
 
@@ -47,7 +47,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="No destination selected"
+        android:text="@string/no_destination_selected"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_dest" />
@@ -57,14 +57,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Rsync Arguments"
+        android:hint="@string/rsync_arguments"
         app:layout_constraintTop_toBottomOf="@+id/tv_dest_path">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_rsync_args"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="-av --delete --progress" />
+            android:text="@string/default_rsync_args" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -72,7 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Start Sync"
+        android:text="@string/start_sync"
         app:layout_constraintTop_toBottomOf="@+id/til_rsync_args" />
 
     <TextView
@@ -80,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Current File: "
+        android:text="@string/current_file_initial"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@+id/btn_sync" />
 
@@ -96,7 +96,7 @@
             android:id="@+id/tv_log"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Logs will appear here..."
+            android:text="@string/logs_default"
             android:textSize="12sp"
             android:fontFamily="monospace" />
     </ScrollView>

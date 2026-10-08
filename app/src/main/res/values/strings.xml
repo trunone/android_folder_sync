@@ -1,3 +1,23 @@
-<resources>
+<resources tools:ignore="TypographyDashes" xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">FolderSync</string>
+    <string name="save_pair">Save Pair</string>
+    <string name="select_source">Select Source</string>
+    <string name="no_source_selected">No source selected</string>
+    <string name="select_destination">Select Destination</string>
+    <string name="no_destination_selected">No destination selected</string>
+    <string name="rsync_arguments">Rsync Arguments</string>
+    <string name="default_rsync_args">-av --delete --progress</string>
+    <string name="start_sync">Start Sync</string>
+    <string name="current_file_initial">Current File: </string>
+    <string name="current_file_prefix">Current File: %1$s</string>
+    <string name="current_file_done">Current File: Done</string>
+    <string name="logs_default">Logs will appear here…</string>
+    <string name="sync_pair_name">Sync Pair Name</string>
+    <string name="source_label">Source: %1$s</string>
+    <string name="dest_label">Dest: %1$s</string>
+    <string name="source_sample">Source: /path/to/source</string>
+    <string name="dest_sample">Dest: /path/to/dest</string>
+    <string name="add_sync_pair">Add sync pair</string>
+    <string name="delete_sync_pair">Delete sync pair</string>
+    <string name="log_format">%1$s\n%2$s</string>
 </resources>
